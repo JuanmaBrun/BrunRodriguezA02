@@ -1,13 +1,48 @@
+import 'package:brunrodrigueza02/widgets/btn_operation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final TextEditingController _counterController =
+      TextEditingController(text: '0');
+
+  void _incrementCounter() {
+    setState(() {
+      int currentValue = int.parse(_counterController.text);
+      _counterController.text = (currentValue + 1).toString();
+      print("Valor + 1:" + _counterController.text);
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      int currentValue = int.parse(_counterController.text);
+      if (currentValue > 0) {
+        _counterController.text = (currentValue - 1).toString();
+        print("Valor - 1:" + _counterController.text);
+      } else {
+        print("El valor no puede ser menor que 0");
+      }
+    });
+  }
+
+  void _resetCounter() {
+    setState(() {
+      _counterController.text = '0';
+      print("Valor reseteado");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,9 +70,9 @@ class MyApp extends StatelessWidget {
                   ),
                   const SizedBox(height: 30),
                   const SizedBox(height: 20),
-                  const Text(
-                    '0',
-                    style: TextStyle(
+                  Text(
+                    _counterController.text,
+                    style: const TextStyle(
                       fontFamily: 'PoppinsThin',
                       color: Colors.white,
                       fontSize: 200,
@@ -47,59 +82,11 @@ class MyApp extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          '+',
-                          style: TextStyle(
-                            fontSize: 26,
-                            color: Colors.white,
-                            fontFamily: 'Poppins',
-                          ),
-                        ),
-                      ),
+                      ButtonOperation(texto: "+", onPressed: _incrementCounter),
                       const SizedBox(width: 10),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          'Reset',
-                          style: TextStyle(
-                            fontSize: 26,
-                            color: Colors.white,
-                            fontFamily: 'Poppins',
-                          ),
-                        ),
-                      ),
+                      ButtonOperation(texto: "Reset", onPressed: _resetCounter),
                       const SizedBox(width: 10),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          '-',
-                          style: TextStyle(
-                            fontSize: 26,
-                            color: Colors.white,
-                            fontFamily: 'Poppins',
-                          ),
-                        ),
-                      ),
+                      ButtonOperation(texto: "-", onPressed: _decrementCounter),
                     ],
                   ),
                 ],
