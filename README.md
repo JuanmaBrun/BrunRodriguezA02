@@ -44,6 +44,9 @@ Crea un nuevo PROYECTO y crea el contador que creamos en android(sin funcionalid
 
 ![Screenshot](img/operations.png)
 
-* Los 
+* Los resultados se muestran tanto por pantalla como por consola.
+
+![Screenshot](img/pantalla2.png)
+![Screenshot](img/consola.png)
 
 
